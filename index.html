@@ -281,7 +281,7 @@
 
         .cards {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3,1fr);
             gap: 16px;
             margin-top: 18px;
         }
@@ -290,94 +290,84 @@
             padding: 22px;
             border: 1px solid var(--line);
             border-radius: 18px;
-            background: rgba(6, 18, 31, .62);
+            background: rgba(6,18,31,.62);
         }
 
         .icon {
-            font-size: 27px;
-            margin-bottom: 10px
+            font-size:27px;
+            margin-bottom:10px
         }
 
         .card h3 {
-            margin: 0 0 7px;
-            font-size: 17px
+            margin:0 0 7px;
+            font-size:17px
         }
 
         .card p {
-            font-size: 14px;
-            line-height: 1.7;
-            color: var(--muted)
+            font-size:14px;
+            line-height:1.7;
+            color:var(--muted)
         }
 
         .letter {
-            font-size: 18px !important;
+            font-size:18px !important;
         }
 
         .signature {
-            margin-top: 24px;
-            color: var(--cyan);
-            font: 16px/1.6 Consolas, Monaco, monospace;
+            margin-top:24px;
+            color:var(--cyan);
+            font:16px/1.6 Consolas,Monaco,monospace;
         }
 
         .btnrow {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 24px;
+            display:flex;
+            flex-wrap:wrap;
+            gap:12px;
+            margin-top:24px;
         }
 
         .btn {
-            display: inline-block;
-            text-decoration: none;
-            padding: 12px 17px;
-            border-radius: 12px;
-            border: 1px solid var(--line);
-            color: var(--text);
-            background: rgba(115, 231, 255, .07);
-            transition: .2s ease;
+            display:inline-block;
+            text-decoration:none;
+            padding:12px 17px;
+            border-radius:12px;
+            border:1px solid var(--line);
+            color:var(--text);
+            background:rgba(115,231,255,.07);
+            transition:.2s ease;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            border-color: rgba(115, 231, 255, .55);
-            box-shadow: 0 8px 30px rgba(55, 190, 255, .12);
+            transform:translateY(-2px);
+            border-color:rgba(115,231,255,.55);
+            box-shadow:0 8px 30px rgba(55,190,255,.12);
         }
 
         footer {
-            text-align: center;
-            color: #71879a;
-            margin-top: 56px;
-            font: 13px/1.6 Consolas, Monaco, monospace;
+            text-align:center;
+            color:#71879a;
+            margin-top:56px;
+            font:13px/1.6 Consolas,Monaco,monospace;
         }
 
         .cursor {
-            display: inline-block;
-            width: 9px;
-            height: 1.05em;
-            margin-left: 5px;
-            vertical-align: -2px;
-            background: var(--green);
-            animation: blink 1s steps(1) infinite;
+            display:inline-block;
+            width:9px;
+            height:1.05em;
+            margin-left:5px;
+            vertical-align:-2px;
+            background:var(--green);
+            animation:blink 1s steps(1) infinite;
         }
 
         @keyframes blink {
-            50% {
-                opacity: 0
-            }
+            50%{opacity:0}
         }
 
         @media (max-width:760px) {
-            .cards {
-                grid-template-columns: 1fr
-            }
-
-            .section {
-                padding: 22px
-            }
-
-            .topbar {
-                margin-bottom: 28px
-            }
+            .cards {grid-template-columns:1fr}
+            .section {padding:22px}
+            .topbar {margin-bottom:28px}
         }
     </style>
 </head>
@@ -429,6 +419,20 @@
         </div>
     </section>
 
+    <!-- ========== 知识点板块上移，放在hero之后第一个section ========== -->
+    <section class="section">
+        <h2>HTML Knowledge Points</h2>
+        <div class="terminal">
+            <div class="terminal-head">
+                <span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span>
+            </div>
+            <div class="terminal-body">
+                <div><span class="prompt">student@school:~$</span> html‑knowledge‑point</div>
+                <div id="type‑output"><span class="cursor"></span></div>
+            </div>
+        </div>
+    </section>
+
     <section class="section">
         <h2>What you taught me</h2>
         <div class="cards">
@@ -449,21 +453,6 @@
             </div>
         </div>
     </section>
-
-    <!-- ========== 新增：HTML知识点打字机板块 ========== -->
-    <section class="section">
-        <h2>HTML Knowledge Points</h2>
-        <div class="terminal">
-            <div class="terminal-head">
-                <span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span>
-            </div>
-            <div class="terminal-body">
-                <div><span class="prompt">student@school:~$</span> html‑knowledge‑point</div>
-                <div id="type‑output"><span class="cursor"></span></div>
-            </div>
-        </div>
-    </section>
-    <!-- ========== 知识点板块结束 ========== -->
 
     <section class="section">
         <h2>A small message for you</h2>
@@ -497,7 +486,6 @@
         ];
         const skip = document.getElementById("skip");
         let index = 0;
-        // 每一步停留约 2.4 秒，最后淡出进入主页
         const nextStep = () => {
             if (index < steps.length - 1) {
                 steps[index].classList.remove("show");
@@ -509,12 +497,8 @@
             }
         };
         skip.addEventListener("click", () => opening.classList.add("hidden"));
-        // 页面打开后立即开始动画
         setTimeout(nextStep, 2400);
 
-
-        // ---------------------- HTML知识点打字机逻辑（修复尖括号显示） ----------------------
-        // HTML转义函数：把 < > & " 转成实体字符，原样显示标签文本
         function escapeHTML(str){
             const div = document.createElement('div');
             div.textContent = str;
@@ -558,9 +542,9 @@
 
         const outputDom = document.querySelector("#type‑output");
         let currentIndex = 0;
-        let typeSpeed = 45;    //打字速度，毫秒
-        let eraseSpeed = 25;   //删除速度
-        let holdTime = 2200;  //打完完整一行停留时间
+        let typeSpeed = 45;
+        let eraseSpeed = 25;
+        let holdTime = 2200;
 
         async function typeWrite(rawText) {
             outputDom.innerHTML = `<span class="cursor"></span>`;
@@ -570,7 +554,6 @@
                 await sleep(typeSpeed);
             }
             await sleep(holdTime);
-            //删除
             for(let i=rawText.length; i>0; i--){
                 const slice = rawText.substring(0,i-1);
                 outputDom.innerHTML = escapeHTML(slice) + `<span class="cursor"></span>`;
@@ -587,7 +570,6 @@
                 if(currentIndex >= knowledgeList.length) currentIndex = 0;
             }
         }
-        //等开场动画差不多结束后启动打字，避免冲突
         setTimeout(()=>{
             loopKnowledge();
         },5000);
