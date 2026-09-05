@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Teachers' Day | To My ICT Teacher</title>
+  <meta name="description" content="A Teachers' Day thank-you page for my ICT teacher." />
+  <style>
+
+    /* ===== Opening animation ===== */
+    #opening{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at center, rgba(31,103,150,.20), transparent 40%),
+        #030811;
+      transition:opacity .8s ease, visibility .8s ease;
+    }
+    #opening.hidden{
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
+    .opening-inner{
+      width:min(900px,90vw);
+      text-align:center;
+      font-family:Inter,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    }
+    .opening-step{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:min(900px,90vw);
+      transform:translate(-50%,-50%) scale(.96);
+      opacity:0;
+      visibility:hidden;
+      transition:opacity .7s ease, transform .7s ease;
+    }
+    .opening-step.show{
+      opacity:1;
+      visibility:visible;
+      transform:translate(-50%,-50%) scale(1);
+    }
+    .opening-small{
+      color:#73e7ff;
+      font:14px Consolas,Monaco,monospace;
+      letter-spacing:.15em;
+      margin-bottom:18px;
+    }
+    .opening-title{
+      margin:0;
+      font-size:clamp(46px,9vw,100px);
+      line-height:1.05;
+      letter-spacing:-.05em;
+      background:linear-gradient(90deg,#73e7ff,#75ffb0,#ffe184);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .opening-text{
+      margin:0;
+      color:#ecf7ff;
+      font-size:clamp(32px,6vw,70px);
+      font-weight:700;
+    }
+    .opening-sub{
+      margin-top:18px;
+      color:#9fb6c7;
+      font-size:clamp(15px,2vw,19px);
+      line-height:1.8;
+    }
+    .opening-line{
+      width:0;
+      height:1px;
+      margin:26px auto 0;
+      background:#73e7ff;
+      box-shadow:0 0 18px #73e7ff;
+      transition:width 1s ease;
+    }
+    .opening-step.show .opening-line{width:min(420px,70vw)}
+    .skip{
+      position:fixed;
+      right:22px;
+      bottom:20px;
+      z-index:10000;
+      color:#71879a;
+      font:12px Consolas,Monaco,monospace;
+      cursor:pointer;
+      opacity:.8;
+    }
+    :root{
+      --bg:#07111f;
+      --card:rgba(12, 26, 45, .78);
+      --line:rgba(121, 213, 255, .22);
+      --text:#ecf7ff;
+      --muted:#a9bdcc;
+      --cyan:#73e7ff;
+      --green:#75ffb0;
+      --yellow:#ffe184;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(28,132,255,.18), transparent 28%),
+        radial-gradient(circle at 85% 25%, rgba(34,255,178,.10), transparent 24%),
+        linear-gradient(135deg,#050b14,#07111f 45%,#081827);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.14;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size:32px 32px;
+      mask-image:linear-gradient(to bottom,black,transparent 90%);
+    }
+
+    .wrap{
+      width:min(980px,92vw);
+      margin:auto;
+      padding:52px 0 70px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      margin-bottom:54px;
+      color:var(--muted);
+      font-family:Consolas, Monaco, monospace;
+      font-size:14px;
+    }
+
+    .status{
+      display:flex;
+      align-items:center;
+      gap:9px;
+    }
+
+    .dot{
+      width:9px;height:9px;border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 14px var(--green);
+    }
+
+    .hero{
+      min-height:62vh;
+      display:grid;
+      align-content:center;
+      gap:22px;
+    }
+
+    .tag{
+      width:max-content;
+      max-width:100%;
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      color:var(--cyan);
+      background:rgba(115,231,255,.05);
+      font:13px/1.2 Consolas, Monaco, monospace;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(42px,8vw,86px);
+      line-height:.98;
+      letter-spacing:-.045em;
+      max-width:900px;
+    }
+
+    .gradient{
+      background:linear-gradient(90deg,var(--cyan),var(--green),var(--yellow));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .subtitle{
+      margin:0;
+      max-width:760px;
+      color:#c9d8e5;
+      font-size:clamp(17px,2.2vw,22px);
+      line-height:1.8;
+    }
+
+    .terminal{
+      margin-top:18px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(3,10,18,.72);
+      box-shadow:0 24px 80px rgba(0,0,0,.28);
+      overflow:hidden;
+    }
+
+    .terminal-head{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:12px 15px;
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.025);
+    }
+
+    .t-dot{width:10px;height:10px;border-radius:50%;background:#607080}
+    .terminal-body{
+      padding:22px;
+      font:15px/1.9 Consolas, Monaco, monospace;
+      color:#d8e7f1;
+      overflow:auto;
+    }
+    .prompt{color:var(--green)}
+    .key{color:var(--cyan)}
+    .value{color:var(--yellow)}
+
+    .section{
+      margin-top:72px;
+      padding:30px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:var(--card);
+      backdrop-filter:blur(12px);
+    }
+
+    .section h2{
+      margin:0 0 15px;
+      font-size:28px;
+    }
+
+    .section p{
+      margin:0;
+      color:#c5d5e2;
+      line-height:1.9;
+      font-size:17px;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-top:18px;
+    }
+
+    .card{
+      padding:22px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(6,18,31,.62);
+    }
+
+    .icon{font-size:27px;margin-bottom:10px}
+    .card h3{margin:0 0 7px;font-size:17px}
+    .card p{font-size:14px;line-height:1.7;color:var(--muted)}
+
+    .letter{
+      font-size:18px !important;
+    }
+
+    .signature{
+      margin-top:24px;
+      color:var(--cyan);
+      font:16px/1.6 Consolas, Monaco, monospace;
+    }
+
+    .btnrow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:24px;
+    }
+
+    .btn{
+      display:inline-block;
+      text-decoration:none;
+      padding:12px 17px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      color:var(--text);
+      background:rgba(115,231,255,.07);
+      transition:.2s ease;
+    }
+    .btn:hover{
+      transform:translateY(-2px);
+      border-color:rgba(115,231,255,.55);
+      box-shadow:0 8px 30px rgba(55,190,255,.12);
+    }
+
+    footer{
+      text-align:center;
+      color:#71879a;
+      margin-top:56px;
+      font:13px/1.6 Consolas, Monaco, monospace;
+    }
+
+    .cursor{
+      display:inline-block;
+      width:9px;
+      height:1.05em;
+      margin-left:5px;
+      vertical-align:-2px;
+      background:var(--green);
+      animation:blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink{50%{opacity:0}}
+
+    @media (max-width:760px){
+      .cards{grid-template-columns:1fr}
+      .section{padding:22px}
+      .topbar{margin-bottom:28px}
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Opening sequence -->
+  <div id="opening">
+    <div class="opening-inner">
+
+      <div class="opening-step show" id="step1">
+        <div class="opening-small">INITIALIZING · TEACHERS_DAY.exe</div>
+        <h1 class="opening-title">教师节快乐！</h1>
+        <div class="opening-line"></div>
+      </div>
+
+      <div class="opening-step" id="step2">
+        <div class="opening-small">HELLO, TEACHER</div>
+        <p class="opening-text">你好，王岩老师。</p>
+        <div class="opening-line"></div>
+      </div>
+
+      <div class="opening-step" id="step3">
+        <div class="opening-small">A MESSAGE FROM YOUR STUDENT</div>
+        <p class="opening-text">谢谢您在课上教我的ICT知识。</p>
+        <div class="opening-line"></div>
+      </div>
+
+    </div>
+    <div class="skip" id="skip">skip intro →</div>
+  </div>
+
+  <main class="wrap">
+    <div class="topbar">
+      <div>&lt;teachers-day / ict&gt;</div>
+      <div class="status"><span class="dot"></span> system: grateful</div>
+    </div>
+
+    <section class="hero">
+      <div class="tag">10 September · Teachers' Day</div>
+      <h1>
+        To my <span class="gradient">ICT Teacher</span>,
+        <br>thank you.
+      </h1>
+
+      <p class="subtitle">
+        谢谢您教会我的，不只是怎样使用电脑、怎样写代码，
+        更是怎样把一个想法，一步一步变成真正能够运行的东西。
+      </p>
+
+      <div class="terminal">
+        <div class="terminal-head">
+          <span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span>
+        </div>
+        <div class="terminal-body">
+          <div><span class="prompt">student@school:~$</span> teacher --info</div>
+          <div><span class="key">name:</span> <span class="value">王岩老师</span></div>
+          <div><span class="key">subject:</span> ICT</div>
+          <div><span class="key">impact:</span> countless ideas, skills and inspiration</div>
+          <div><span class="key">status:</span> deeply appreciated<span class="cursor"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What you taught me</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="icon">💻</div>
+          <h3>Technology</h3>
+          <p>让我真正理解电脑、软件与信息技术，而不只是会“使用”它们。</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧠</div>
+          <h3>Problem Solving</h3>
+          <p>学会分析、尝试、修改，然后继续前进。</p>
+        </div>
+        <div class="card">
+          <div class="icon">🚀</div>
+          <h3>Creativity</h3>
+          <p>让我知道技术不只是课本里的知识，也可以成为创造新东西的工具。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>A small message for you</h2>
+      <p class="letter">
+        在 ICT 课堂上，有些知识我可能以后会忘记具体的步骤，
+        但我不会忘记那些第一次把程序运行成功、第一次解决问题、
+        第一次发现“原来我也可以做出来”的时刻。
+        <br><br>
+        谢谢您的耐心、指导和鼓励。也谢谢您让 ICT 这门课不只是考试中的一个科目，
+        而成为一个让我愿意继续探索的领域。
+        <br><br>
+        祝您教师节快乐。希望以后无论我做什么项目、写什么程序，
+        都还能记得，是有老师曾经帮助我打开了这扇门。
+      </p>
+
+      <div class="signature">
+        - 陈奕皓和全体ict学生<br>
+        Happy Teachers' Day!
+      </div>
+
+      <div class="btnrow">
+        <a class="btn" href="https://github.com/Henry110510" target="_blank" rel="noopener">
+          View my GitHub →
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      made with HTML, CSS, gratitude &amp; a little bit of code ♥
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      const opening = document.getElementById("opening");
+      const steps = [
+        document.getElementById("step1"),
+        document.getElementById("step2"),
+        document.getElementById("step3")
+      ];
+      const skip = document.getElementById("skip");
+      let index = 0;
+
+      // 每一步停留约 2.4 秒，最后淡出进入主页
+      const nextStep = () => {
+        if (index < steps.length - 1) {
+          steps[index].classList.remove("show");
+          index++;
+          steps[index].classList.add("show");
+          setTimeout(nextStep, 2600);
+        } else {
+          setTimeout(() => opening.classList.add("hidden"), 2600);
+        }
+      };
+
+      skip.addEventListener("click", () => opening.classList.add("hidden"));
+
+      // 页面打开后立即开始动画
+      setTimeout(nextStep, 2400);
+    })();
+  </script>
+
+</body>
+</html>
